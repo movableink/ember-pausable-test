@@ -4,12 +4,16 @@ import { _registerPauseOn, _reset as reset } from 'ember-concurrency-test-contro
 export function pauseOn(name) {
   let awaitPauseResolve,
       yieldPromise,
-      yieldResolve;
+      yieldResolve,
+      yieldReject;
 
   _registerPauseOn(name, (yieldable) => {
-    if (awaitPauseResolve) {
-      awaitPauseResolve();
-    }
+
+    resolve().then(() => yieldable).then(() => {
+      if (awaitPauseResolve) {
+        awaitPauseResolve()
+      }
+    });
 
     return resolve()
       .then(() => yieldPromise)
@@ -17,9 +21,10 @@ export function pauseOn(name) {
   });
 
   function _resetPauseOn() {
-    const { promise, resolve } = defer();
+    const { promise, resolve, reject } = defer();
     yieldPromise = promise;
     yieldResolve = resolve;
+    yieldReject = reject;
   }
 
   _resetPauseOn();
@@ -35,6 +40,9 @@ export function pauseOn(name) {
       awaitPauseResolve = resolve;
 
       return promise;
+    },
+    throwException(error) {
+      yieldReject(error);
     }
   };
 }
