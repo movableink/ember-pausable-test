@@ -2,7 +2,7 @@ import Component from '@ember/component';
 import layout from '../templates/components/state-progressor';
 import { get, set } from '@ember/object';
 import { task, timeout } from 'ember-concurrency';
-import { pausable } from 'ember-concurrency-test-controller';
+import { pausable } from 'ember-pausable-test';
 import Ember from 'ember';
 import { A } from '@ember/array';
 

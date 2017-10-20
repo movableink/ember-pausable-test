@@ -1,6 +1,6 @@
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
-import { pauseOn, reset } from 'ember-concurrency-test-controller/test-support';
+import { pauseOn, reset } from 'ember-pausable-test/test-support';
 import wait from 'ember-test-helpers/wait';
 
 moduleForComponent('state-progressor', 'Integration | Component | state progressor', {

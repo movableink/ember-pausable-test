@@ -2,5 +2,5 @@
 'use strict';
 
 module.exports = {
-  name: 'ember-concurrency-test-controller'
+  name: 'ember-pausable-test'
 };

@@ -1,5 +1,5 @@
 import { defer, resolve } from 'rsvp';
-import { _registerPauseOn, _reset as reset } from 'ember-concurrency-test-controller/-lib/pausable';
+import { _registerPauseOn, _reset as reset } from 'ember-pausable-test/-lib/pausable';
 
 export function pauseOn(name) {
   let awaitPauseResolve,

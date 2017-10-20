@@ -1,4 +1,4 @@
-# ember-concurrency-test-controller
+# ember-pausable-test
 
 This library provides a set of tools to pause async behavior in your tests to make it easier to assert intermediate state.
 
@@ -7,7 +7,7 @@ This library provides a set of tools to pause async behavior in your tests to ma
 
 ### Installation
 
-* `ember install ember-concurrency-test-controller`
+* `ember install ember-pausable-test`
 
 ### Acceptance Test
 
@@ -44,7 +44,7 @@ Instead, with this library, we can explicitly pause the model hook so we can tes
 
 ```js
 import Route from '@ember/routing/route';
-import { pausable } from 'ember-concurrency-test-controller';
+import { pausable } from 'ember-pausable-test';
 
 export default Route.extend({
   model({ id }) {
@@ -59,7 +59,7 @@ And, in our test:
 (_note:_ You should always call `reset()` in the `afterEach` hook when using `pauseOn`)
 
 ```js
-import { pauseOn, reset } from 'ember-concurrency-test-controller/test-support';
+import { pauseOn, reset } from 'ember-pausable-test/test-support';
 
 moduleForAcceptance('Acceptance | friend', {
   afterEach() {
@@ -132,7 +132,7 @@ yield pausable(timeout(waitTime), 'state-progressor');
 ...we can setup our integration test like this:
 
 ```js
-import { pauseOn } from 'ember-concurrency-test-controller/test-support';
+import { pauseOn } from 'ember-pausable-test/test-support';
 import wait from 'ember-test-helpers/wait';
 
 test('it renders each of the steps', async function(assert) {
@@ -163,7 +163,7 @@ test('it renders each of the steps', async function(assert) {
 
 ### API
 
-#### `ember-concurrency-test-controller`
+#### `ember-pausable-test`
 
 - `pausable(yieldable: Any, tokenName: String)`
   In a test environment and when a `pauseOn` is registered with the given `tokenName`, this method will return a promise that resolves
@@ -171,7 +171,7 @@ test('it renders each of the steps', async function(assert) {
 
   In non-test environments, or when there is no `pauseOn` registered, this will return the `yieldable` directly.
 
-#### `ember-concurrency-test-controller/test-support`
+#### `ember-pausable-test/test-support`
 
 - `pauseOn(tokenName: String)`
   This regsiters a pause to happen when a corresponding `pausable` is reached in the code.

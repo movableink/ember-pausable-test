@@ -1,6 +1,6 @@
 import { test } from 'qunit';
 import moduleForAcceptance from '../../tests/helpers/module-for-acceptance';
-import { pauseOn, reset } from 'ember-concurrency-test-controller/test-support'
+import { pauseOn, reset } from 'ember-pausable-test/test-support'
 
 moduleForAcceptance('Acceptance | friend', {
   afterEach() {
