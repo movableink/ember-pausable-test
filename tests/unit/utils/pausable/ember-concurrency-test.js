@@ -1,5 +1,5 @@
-import { pausable } from 'ember-concurrency-test-controller';
-import { pauseOn, reset } from 'ember-concurrency-test-controller/test-support'
+import { pausable } from 'ember-pausable-test';
+import { pauseOn, reset } from 'ember-pausable-test/test-support'
 import { module, test } from 'qunit';
 import EmberObject, { get, set } from '@ember/object';
 import { run } from '@ember/runloop';

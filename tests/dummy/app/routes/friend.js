@@ -1,7 +1,7 @@
 import Route from '@ember/routing/route';
 import { defer } from 'rsvp';
 import Ember from 'ember';
-import { pausable } from 'ember-concurrency-test-controller';
+import { pausable } from 'ember-pausable-test';
 
 const { testing } = Ember;
 
