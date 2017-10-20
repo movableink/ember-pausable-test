@@ -208,3 +208,7 @@ test('it renders each of the steps', async function(assert) {
 * `ember build`
 
 For more information on using ember-cli, visit [https://ember-cli.com/](https://ember-cli.com/).
+
+### Releasing
+
+* `ember release {--minor, --major, --patch}`
