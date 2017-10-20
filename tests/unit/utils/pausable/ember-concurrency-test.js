@@ -7,7 +7,7 @@ import { task, timeout } from 'ember-concurrency';
 import wait from 'ember-test-helpers/wait';
 import { defer } from 'rsvp';
 
-module('Unit | Utility | pausable', {
+module('pausable | ember-concurrency tasks', {
   beforeEach() {
     this.registerTask = (taskFn) => {
       return this._obj = EmberObject.extend({
@@ -90,6 +90,28 @@ test('it can await for the pause to be hit', async function(assert) {
   assert.equal(get(obj, 'value'), '1', 'we have paused on `yield-1`');
 });
 
+test('it can pause on an ember-concurrency timeout', async function(assert) {
+  const obj = this.registerTask(function *() {
+    set(this, 'value', '1');
+    yield pausable(timeout(50), 'yield-1');
+    set(this, 'value', '2');
+  });
+
+  const { awaitPause, resume } = pauseOn('yield-1');
+
+  this.perform();
+
+  await awaitPause();
+
+  assert.equal(get(obj, 'value'), '1');
+
+  resume();
+
+  await wait();
+
+  assert.equal(get(obj, 'value'), '2', 'we have paused on `yield-1`');
+});
+
 test('the pause can be hit and awaited for repeatedly', async function(assert) {
   const obj = this.registerTask(function *() {
     let inc = 0;
@@ -120,4 +142,23 @@ test('the pause can be hit and awaited for repeatedly', async function(assert) {
   await awaitPause();
 
   assert.equal(get(obj, 'value'), 3, 'we have paused on `yield-1`');
+});
+
+test('the paused statement can throw', async function(assert) {
+  const obj = this.registerTask(function *() {
+    try {
+      set(this, 'value', '1');
+      yield pausable('hello', 'yield-1');
+    } catch (e) {
+      set(this, 'value', e);
+    }
+  });
+
+  pauseOn('yield-1').throwException('THROW!');
+
+  this.perform();
+
+  await wait();
+
+  assert.equal(get(obj, 'value'), 'THROW!');
 });
