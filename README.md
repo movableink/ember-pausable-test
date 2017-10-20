@@ -88,7 +88,7 @@ it('shows a friend', async function(assert) {
 
 Let's imagine a component that, when it renders, it pushes items onto a list every second.
 
-There are two things I'd like to think about when testing this componen:
+There are two things I'd like to think about when testing this component:
 
 - I want to test each step of the state as it changes
 - I want the test to run fast (no need to wait a second between each step)
