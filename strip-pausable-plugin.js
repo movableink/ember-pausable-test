@@ -7,6 +7,7 @@ function StripPausablePlugin() {
         if (path.node.source.value === 'ember-pausable-test') {
           path.traverse({
             ImportSpecifier(specifierPath) {
+
               if (specifierPath.node.imported.name === 'pausable') {
                 if (specifierPath.inList && specifierPath.container.length > 1) {
                   specifierPath.remove();
