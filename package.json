@@ -15,7 +15,7 @@
   "scripts": {
     "build": "ember build",
     "start": "ember server",
-    "test": "ember test && mocha node-tests"
+    "test": "ember try:each && mocha node-tests"
   },
   "dependencies": {
     "ember-cli-babel": "^6.6.0"
