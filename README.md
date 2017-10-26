@@ -188,6 +188,17 @@ test('it renders each of the steps', async function(assert) {
   - `throwException()`
     This will cause the paused promise to reject, instead of resolve.
 
+### Configuration
+
+Experimental support for unwrappping/removing `pausable()` calls in non-test builds can be used by modifying your `ember-cli-build.js` file:
+
+```js
+const app = new EmberApp({
+  'ember-pausable-test': {
+    strip: true
+  }
+});
+```
 
 ## Collaborating
 --------
