@@ -1,7 +1,7 @@
-import Ember from 'ember';
 import { assert } from '@ember/debug';
+import config from 'ember-get-config';
 
-const { testing } = Ember;
+const { environment } = config;
 const PAUSABLE = new Map();
 
 export function _registerPauseOn(name, callback) {
@@ -15,7 +15,7 @@ export function _reset() {
 
 export default function pausable(yieldable, name) {
   // Proceed if we're not testing or no pause was registered.
-  if (!testing || !PAUSABLE.has(name)) {
+  if (environment !== 'test' || !PAUSABLE.has(name)) {
     return yieldable;
   }
 
