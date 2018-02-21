@@ -56,11 +56,9 @@ test('it can handle pausing on multiple promises', async function(assert) {
 
   assert.equal(state, 1);
 
-  const pause2 = awaitPause2();
-
   resume1();
 
-  await pause2;
+  await awaitPause2();
 
   assert.equal(state, 2);
 
