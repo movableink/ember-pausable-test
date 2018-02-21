@@ -1,5 +1,6 @@
 import { defer, resolve } from 'rsvp';
 import { _registerPauseOn, _reset as reset } from 'ember-pausable-test/-lib/pausable';
+import { next } from '@ember/runloop';
 
 export function pauseOn(name) {
   let awaitPauseResolve,
@@ -31,7 +32,7 @@ export function pauseOn(name) {
 
   return {
     resume() {
-      yieldResolve();
+      next(yieldResolve);
       _resetPauseOn();
     },
     awaitPause() {
